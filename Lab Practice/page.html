@@ -5,41 +5,43 @@
     <link rel="stylesheet" href="D:\AIUB\Semester-11\WEB TECH\WTechSpring_25-26\Lab Practice\style.css">
 </head>
 <body>
-    <h1>Contact Us</h1>
-    <form>
-        <table>
-            <tr>
-                <td>
-                    <label for="firstname">FIRST NAME</label><br>
-                    <input type="text" name="firstname">
-                </td>
-                <td>
-                    <label for="lastname">LAST NAME</label><br>
-                    <input type="text" name="lastname">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="email">EMAIL</label><br>
-                    <input type="text" name="email">
-                </td>
-                <td>
-                    <label for="phone_number">PHONE NUMBER</label><br>
-                    <input type="text"  name="phone_number">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <label for="message">WHAT DO YOU HAVE IN MIND</label><br>
-                    <textarea name="message" id="message" rows="5" cols="45" placeholder="Please enter query..."></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="Submit">
-                </td>
-            </tr>
-        </table>
-    </form>
+    <div class="form-container">
+        <h1>Contact Us</h1>
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <label for="firstname">FIRST NAME</label><br>
+                        <input type="text" name="firstname">
+                    </td>
+                    <td>
+                        <label for="lastname">LAST NAME</label><br>
+                        <input type="text" name="lastname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">EMAIL</label><br>
+                        <input type="text" name="email">
+                    </td>
+                    <td>
+                        <label for="phone_number">PHONE NUMBER</label><br>
+                        <input type="text"  name="phone_number">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <label for="message">WHAT DO YOU HAVE IN MIND</label><br>
+                        <textarea name="message" id="message" rows="5" cols="45" placeholder="Please enter query..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <input type="submit" value="Submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>
