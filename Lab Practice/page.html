@@ -3,11 +3,12 @@
 <head>
     <title>Lab Practice Performance</title>
     <link rel="stylesheet" href="D:\AIUB\Semester-11\WEB TECH\WTechSpring_25-26\Lab Practice\style.css">
+    <script src="D:\AIUB\Semester-11\WEB TECH\WTechSpring_25-26\Lab Practice\Script.js"></script>
 </head>
 <body>
     <div class="form-container">
         <h1>Contact Us</h1>
-        <form>
+        <form onsubmit="return validateForm()">
             <table>
                 <tr>
                     <td>
@@ -25,8 +26,8 @@
                         <input type="text" id="email" name="email">
                     </td>
                     <td>
-                        <label for="phone_number">PHONE NUMBER</label><br>
-                        <input type="text" id="phone_number" name="phone_number">
+                        <label for="phone">PHONE NUMBER</label><br>
+                        <input type="text" id="phone" name="phone">
                     </td>
                 </tr>
                 <tr>
