@@ -18,4 +18,9 @@ form {
     background-color: #f7f7f7;
     padding: 10px;
 }
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 15px;
+}
 
