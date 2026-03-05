@@ -52,3 +52,6 @@ input[type="submit"] {
     margin: 0 auto;
     text-align: center;
 }
+input[type="submit"]:hover {
+    background-color: #1e3629;
+}
