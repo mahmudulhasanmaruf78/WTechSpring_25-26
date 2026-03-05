@@ -36,4 +36,8 @@ input[type="text"],textarea {
     background-color: #ffffff;
     box-sizing: border-box;
 }
+textarea {
+    resize: vertical;
+    font-family: inherit;
+}
 
