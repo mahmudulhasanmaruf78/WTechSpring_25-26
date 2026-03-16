@@ -20,7 +20,5 @@ function calculateTotal(){
     if(totalPrice > 1000){
         alert("Congratulations! You are eligible for a gift coupon.");
     }
-
 }
-
 quantityInput.addEventListener("input", calculateTotal);
