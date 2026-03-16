@@ -14,10 +14,10 @@ function calculateTotal(){
         quantityInput.value = 0;
     }
 
-    let total = unitPrice * quantity_per_day * days;
-    totalPriceInput.value = total;
+    let totalPrice = unitPrice * quantity_per_day * days;
+    totalPriceInput.value = totalPrice;
 
-    if(total > 1000){
+    if(totalPrice > 1000){
         alert("Congratulations! You are eligible for a gift coupon.");
     }
 
