@@ -6,6 +6,7 @@ include "../Controller/RegistrationController.php";
     <body>
         <form method="post" action="">
             <h1> PHP Form Validation Example </h1>
+            <p><span style="color: red;">* Required fields</span></p>
             <table>
                 <tr>
                     <td> <label for="name">Name: </label></td>
