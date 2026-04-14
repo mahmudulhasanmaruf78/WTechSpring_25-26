@@ -6,18 +6,20 @@ include "../Controller/RegistrationController.php";
     <body>
         <form method="post" action="">
             <h1> PHP Form Validation Example </h1>
-            <p><span style="color: red;">* Required fields</span></p>
+                <?php echo $generalErr ?? ''; ?>            
             <table>
                 <tr>
                     <td> <label for="name">Name: </label></td>
                     <td> 
                         <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>"> 
+                        <?php echo $nameErr ?? ''; ?>
                     </td>
                 </tr>
                 <tr>
                     <td> <label for="email">E-mail:  </label></td>
                     <td> 
                         <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"> 
+                        <?php echo $emailErr ?? ''; ?>
                     </td>
                 </tr>
                 <tr>
@@ -38,6 +40,7 @@ include "../Controller/RegistrationController.php";
                         <input type="radio" name="gender" value="female" <?php if (isset($_POST['gender']) && $_POST['gender'] == "female") echo "checked";?>> Female
                         <input type="radio" name="gender" value="male" <?php if (isset($_POST['gender']) && $_POST['gender'] == "male") echo "checked";?>> Male
                         <input type="radio" name="gender" value="other" <?php if (isset($_POST['gender']) && $_POST['gender'] == "other") echo "checked";?>> Other  
+                        <?php echo $genderErr ?? ''; ?>
                     </td>
                 </tr>
                 <tr>

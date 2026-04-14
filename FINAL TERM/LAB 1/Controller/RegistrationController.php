@@ -5,6 +5,10 @@ $email = "";
 $website = "";
 $comment = "";
 $gender = "";
+$nameErr = "";
+$emailErr = "";
+$genderErr = "";
+$reqErr = "";
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
     {
@@ -20,14 +24,18 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $comment = $_REQUEST["comment"];
         $gender = isset($_REQUEST["gender"]) ? $_REQUEST["gender"] : "";
 
+        if(empty($name) || empty($email) || empty($gender))
+        {
+            $generalErr = "<p><span style='color: red; font-weight: bold;'>* Required fields</span></p>";
+        }
 
         if(!empty($name))
             {
-                echo "User Name: " . $name;
+                echo "User Name: " . $name. "<br>";
             }
             else
             {
-                echo "User Name Required";
+                $nameErr = "<span style='color: red;'>*</span>";
             }
 
         if(!empty($email))
@@ -35,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
                 if(preg_match($emailPattern, $email))
                     {
-                        echo " Email: " . $email;
+                        echo " Email: " . $email."<br>";
                     }
                     else
                     {
@@ -44,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             }
             else
             {
-                echo "User Email Required";
+                $emailErr = "<span style='color: red;'>*</span>";
             }
 
         if(!empty($website))
@@ -52,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 $urlPattern = "/^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-]*)*$/";
                 if(preg_match($urlPattern, $website))
                     {
-                        echo " Website: " . $website;
+                        echo " Website: " . $website."<br>";
                     }
                     else
                     {
@@ -62,7 +70,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
         if(!empty($comment))
             {
-                echo " Comment: " . $comment;
+                echo " Comment: " . $comment."<br>";
             }
         if(!empty($gender))
             {
@@ -70,7 +78,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             }
         else
             {
-                echo "Please select a gender";
+                $genderErr = "<span style='color: red;'>*</span>";
             }
         
     }
