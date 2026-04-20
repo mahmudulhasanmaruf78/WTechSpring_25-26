@@ -1,5 +1,5 @@
 <?php
-
+$datafile = "../data.json";
 $name = "";
 $email = "";
 $website = "";
@@ -72,14 +72,52 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             {
                 echo " Comment: " . $comment."<br>";
             }
-        if(!empty($gender))
+        if(!empty($gender)) 
             {
-                echo " Gender: " . $gender;
+                echo " Gender: " . $gender."<br>";
             }
-        else
+            else
             {
                 $genderErr = "<span style='color: red;'>*</span>";
             }
         
+
+        $formdata = array("Name"=>$name, "E-mail"=>$email, "Website"=>$website, "Comment"=>$comment, "Gender"=>$gender);
+
+        if(file_exists($datafile))
+        {
+            $existdata = file_get_contents($datafile);
+            $tempdata = json_decode($existdata, true);
+        }
+        else
+        {
+            $tempdata = array();
+        }
+
+        if(!is_array($tempdata))
+        {
+            $tempdata = array();
+        }
+
+        $tempdata[] = $formdata;
+        $jsondata = json_encode($tempdata, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+
+        if(file_put_contents($datafile, $jsondata))
+        {
+            echo "Data  saved to JSON file.";
+        }
+        else
+        {
+            echo "Error saving data to JSON file.";
+        }
+
+        $data = file_get_contents($datafile);
+        $mydata = json_decode($data, true);
+
+        
+
+
+
+
     }
 ?>
