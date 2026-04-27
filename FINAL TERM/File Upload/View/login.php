@@ -17,7 +17,7 @@ include "../Controller/loginvalidation.php";
                 <td><label for="name">Username: </label></td>
                 <td>
                     <input type="text" id="name" name="name">
-                    <?php echo htmlspecialchars($email); ?>
+                    
                 </td>
             </tr>
             <tr>
