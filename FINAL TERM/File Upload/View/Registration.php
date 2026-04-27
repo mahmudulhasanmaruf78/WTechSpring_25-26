@@ -16,6 +16,13 @@ include "../Controller/RegistrationController.php";
                     </td>
                 </tr>
                 <tr>
+                    <td><label for="password">Password: </label></td>
+                    <td> 
+                        <input type="password" id="password" name="password"> 
+                        <?php echo $passwordErr ?? ''; ?>
+                    </td>
+                </tr>
+                <tr>
                     <td> <label for="email">E-mail:  </label></td>
                     <td> 
                         <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"> 

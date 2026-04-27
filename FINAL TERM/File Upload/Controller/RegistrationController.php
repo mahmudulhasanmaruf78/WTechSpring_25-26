@@ -1,11 +1,13 @@
 <?php
 $datafile = "../data.json";
 $name = "";
+$password = "";
 $email = "";
 $website = "";
 $comment = "";
 $gender = "";
 $nameErr = "";
+$passwordErr = "";
 $emailErr = "";
 $genderErr = "";
 $reqErr = "";
@@ -13,12 +15,14 @@ $reqErr = "";
 if($_SERVER["REQUEST_METHOD"]=="POST")
     {
         $name = $_POST["name"];
+        $password = $_POST["password"];
         $email = $_POST["email"];
         $website = $_POST["website"];
         $comment = $_POST["comment"];
         $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
 
         $name = $_REQUEST["name"];
+        $password = $_REQUEST["password"];
         $email = $_REQUEST["email"];
         $website = $_REQUEST["website"];
         $comment = $_REQUEST["comment"];
@@ -38,6 +42,19 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 $nameErr = "<span style='color: red;'>*</span>";
             }
 
+        if(!empty($password))
+            {
+                if(strlen($password) >= 8)
+                    {
+                        echo " Password: " . str_repeat("*", strlen($password))."<br>";
+                    }  
+            }
+            else
+                    {
+                        $passwordErr = "<span style='color: red;'>*</span>";
+                
+                    }
+
         if(!empty($email))
             {
                 $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
@@ -47,6 +64,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     }
                     else
                     {
+                        $emailErr = "<span style='color: red;'>*</span>";
                         echo "Invalid Email Format. Email must be like example@email.com";
                     }
             }
@@ -82,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             }
         
 
-        $formdata = array("Name"=>$name, "E-mail"=>$email, "Website"=>$website, "Comment"=>$comment, "Gender"=>$gender);
+        $formdata = array("Name"=>$name,"Password"=>$password, "E-mail"=>$email, "Website"=>$website, "Comment"=>$comment, "Gender"=>$gender);
 
         if(file_exists($datafile))
         {
@@ -114,7 +132,5 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $data = file_get_contents($datafile);
         $mydata = json_decode($data, true);
 
-
-0
     }
 ?>
