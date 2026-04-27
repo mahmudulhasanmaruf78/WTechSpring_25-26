@@ -114,7 +114,5 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $data = file_get_contents($datafile);
         $mydata = json_decode($data, true);
 
-
-0
     }
 ?>
