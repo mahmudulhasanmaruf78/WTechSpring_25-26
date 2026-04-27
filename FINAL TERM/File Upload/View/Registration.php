@@ -4,7 +4,7 @@ include "../Controller/RegistrationController.php";
 <!DOCTYPE html>
 <html>
     <body>
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
             <h1> PHP Form Validation Example </h1>
                 <?php echo $generalErr ?? ''; ?>            
             <table>
@@ -49,6 +49,16 @@ include "../Controller/RegistrationController.php";
                         <input type="radio" name="gender" value="other" <?php if (isset($_POST['gender']) && $_POST['gender'] == "other") echo "checked";?>> Other  
                         <?php echo $genderErr ?? ''; ?>
                     </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="file">Upload File: </label>
+                    </td>
+                    <td>
+                        <input type="file" id="file" name="file">
+                        <?php echo $fileErr ?? ''; ?>
+                    </td>
+
                 </tr>
                 <tr>
                     <td> <input type="submit" id="submitbutton" name="submit"> </td>

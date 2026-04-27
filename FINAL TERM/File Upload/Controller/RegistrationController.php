@@ -6,11 +6,13 @@ $email = "";
 $website = "";
 $comment = "";
 $gender = "";
+$file = "";
 $nameErr = "";
 $passwordErr = "";
 $emailErr = "";
 $genderErr = "";
 $reqErr = "";
+$fileErr = "";
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
     {
@@ -20,6 +22,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $website = $_POST["website"];
         $comment = $_POST["comment"];
         $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
+        $file = isset($_FILES["file"]) ? $_FILES["file"] : "";
 
         $name = $_REQUEST["name"];
         $password = $_REQUEST["password"];
@@ -27,6 +30,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $website = $_REQUEST["website"];
         $comment = $_REQUEST["comment"];
         $gender = isset($_REQUEST["gender"]) ? $_REQUEST["gender"] : "";
+        $file = isset($_FILES["file"]) ? $_FILES["file"] : "";
 
         if(empty($name) || empty($email) || empty($gender))
         {
@@ -122,7 +126,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
         if(file_put_contents($datafile, $jsondata))
         {
-            echo "Data  saved to JSON file.";
+            header("Location: login.php");
+            exit();
         }
         else
         {
@@ -131,6 +136,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
         $data = file_get_contents($datafile);
         $mydata = json_decode($data, true);
+        
+
+
+
+
 
     }
 ?>
