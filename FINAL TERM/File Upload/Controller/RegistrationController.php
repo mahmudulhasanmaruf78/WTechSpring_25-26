@@ -1,5 +1,6 @@
 <?php
-$datafile = "../data.json";
+include "../Model/db.php";
+
 $name = "";
 $password = "";
 $email = "";
@@ -7,32 +8,35 @@ $website = "";
 $comment = "";
 $gender = "";
 $file = "";
+
 $nameErr = "";
 $passwordErr = "";
 $emailErr = "";
 $genderErr = "";
-$reqErr = "";
+$generalErr = "";
 $fileErr = "";
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
-    {
-        $name = $_POST["name"];
-        $password = $_POST["password"];
-        $email = $_POST["email"];
-        $website = $_POST["website"];
-        $comment = $_POST["comment"];
-        $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
-        $file = isset($_FILES["file"]) ? $_FILES["file"] : "";
+{
+        $name = $_POST["name"] ?? "";
+        $password = $_POST["password"] ?? "";
+        $email = $_POST["email"] ?? "";
+        $website = $_POST["website"] ?? "";
+        $comment = $_POST["comment"] ?? "";
+        $gender = $_POST["gender"] ?? "";
+        $filepath = "";
 
-        $name = $_REQUEST["name"];
-        $password = $_REQUEST["password"];
-        $email = $_REQUEST["email"];
-        $website = $_REQUEST["website"];
-        $comment = $_REQUEST["comment"];
+        $name = $_REQUEST["name"] ?? "";
+        $password = $_REQUEST["password"] ?? "";
+        $email = $_REQUEST["email"] ?? "";
+        $website = $_REQUEST["website"] ?? "";
+        $comment = $_REQUEST["comment"] ?? "";
         $gender = isset($_REQUEST["gender"]) ? $_REQUEST["gender"] : "";
-        $file = isset($_FILES["file"]) ? $_FILES["file"] : "";
+        $filepath = isset($_FILES["file"]) ? $_FILES["file"] : "";
 
-        if(empty($name) || empty($email) || empty($gender))
+
+
+        if(empty($name) || empty($email) || empty($gender) || empty($password))
         {
             $generalErr = "<p><span style='color: red; font-weight: bold;'>* Required fields</span></p>";
         }
@@ -54,10 +58,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     }  
             }
             else
-                    {
-                        $passwordErr = "<span style='color: red;'>*</span>";
-                
-                    }
+                {
+                    $passwordErr = "<span style='color: red;'>*</span>";
+                }
 
         if(!empty($email))
             {
@@ -90,57 +93,75 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     }
             }
 
-        if(!empty($comment))
+            if(!empty($comment))
             {
                 echo " Comment: " . $comment."<br>";
             }
-        if(!empty($gender)) 
-            {
-                echo " Gender: " . $gender."<br>";
-            }
-            else
-            {
-                $genderErr = "<span style='color: red;'>*</span>";
-            }
-        
+            if(!empty($gender)) 
+                {
+                    echo " Gender: " . $gender."<br>";
+                }
+                else
+                {
+                    $genderErr = "<span style='color: red;'>*</span>";
+                }
+            
+                if(isset($_FILES["file"]) && $_FILES["file"]["error"] == 0)
+                {
+                    $allowedExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+                    $fileName = $_FILES["file"]["name"];
+                    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                    
+                    if(in_array($fileExtension, $allowedExtensions))
+                    {
+                        $target_dir = "../File/";
+                        $target_file = $target_dir . time() . "_" . basename($fileName);
+                        
+                        if(move_uploaded_file($_FILES["file"]["tmp_name"], $target_file))
+                        {
+                            //echo "File uploaded successfully: " . htmlspecialchars(basename($_FILES["file"]["name"]))."<br>";
+                            $filepath = $target_file;
+                        }
+                        else
+                        {
+                            echo "Could not upload file. Please try again.";
+                            $fileErr = "<span style='color: red;'>*</span>";
+                        }
+                    }
+                    else
+                    {
+                        $fileErr = "<span style='color: red;'>*</span>";
+                    }
+                }
+                else
+                {
+                    $fileErr = "<span style='color: red;'>*</span>";
+                }
 
-        $formdata = array("Name"=>$name,"Password"=>$password, "E-mail"=>$email, "Website"=>$website, "Comment"=>$comment, "Gender"=>$gender);
+                if(empty($generalErr) && empty($nameErr) && empty($passwordErr) && empty($emailErr) && empty($genderErr) && empty($fileErr))
+                {
+                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        if(file_exists($datafile))
-        {
-            $existdata = file_get_contents($datafile);
-            $tempdata = json_decode($existdata, true);
-        }
-        else
-        {
-            $tempdata = array();
-        }
+                    $database = new db();
+                    $connection = $database->connection();
+                    $Result = $database->signup($connection, "users", $name, $hashedPassword, $filepath);
 
-        if(!is_array($tempdata))
-        {
-            $tempdata = array();
-        }
-
-        $tempdata[] = $formdata;
-        $jsondata = json_encode($tempdata, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-        if(file_put_contents($datafile, $jsondata))
-        {
-            header("Location: login.php");
-            exit();
-        }
-        else
-        {
-            echo "Error saving data to JSON file.";
-        }
-
-        $data = file_get_contents($datafile);
-        $mydata = json_decode($data, true);
-        
+                    if($Result)
+                    {
+                        header("Location: ../View/login.php");
+                        exit();
+                    }
+                    else
+                    {
+                        echo "Error: Could not save data to the database.";
+                    }
+                }
+            
 
 
 
 
 
-    }
+}
+    
 ?>

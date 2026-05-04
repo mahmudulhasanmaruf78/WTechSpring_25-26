@@ -11,7 +11,7 @@ include "../Controller/RegistrationController.php";
                 <tr>
                     <td> <label for="name">Name: </label></td>
                     <td> 
-                        <input type="text" id="name" name="name" value="<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>"> 
+                        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($_POST['name'] ?? ''); ?>"> 
                         <?php echo $nameErr ?? ''; ?>
                     </td>
                 </tr>
@@ -25,20 +25,20 @@ include "../Controller/RegistrationController.php";
                 <tr>
                     <td> <label for="email">E-mail:  </label></td>
                     <td> 
-                        <input type="email" id="email" name="email" value="<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>"> 
+                        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>"> 
                         <?php echo $emailErr ?? ''; ?>
                     </td>
                 </tr>
                 <tr>
                     <td> <label for="Website">Website:  </label></td>
                     <td> 
-                        <input type="url" id="Website" name="website" value="<?php echo isset($_POST['website']) ? $_POST['website'] : ''; ?>"> 
+                        <input type="url" id="Website" name="website" value="<?php echo htmlspecialchars($_POST['website'] ?? ''); ?>"> 
                     </td>
                 </tr>
                 <tr>
                     <td> <label for="comment">Comment: </label></td>
                     <td> 
-                        <textarea id="comment" name="comment" rows="5" cols="40"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?></textarea> 
+                        <textarea id="comment" name="comment" rows="5" cols="40"><?php echo htmlspecialchars($_POST['comment'] ?? ''); ?></textarea> 
                     </td>
                 </tr>
                 <tr>
@@ -61,7 +61,7 @@ include "../Controller/RegistrationController.php";
 
                 </tr>
                 <tr>
-                    <td> <input type="submit" id="submitbutton" name="submit"> </td>
+                    <td> <input type="submit" id="submit" name="submit"> </td>
                 </tr>
             </table>
         </form>

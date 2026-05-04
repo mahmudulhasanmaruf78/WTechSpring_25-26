@@ -6,5 +6,21 @@
         "Website": "https://github.com",
         "Comment": "m",
         "Gender": "male"
+    },
+    {
+        "Name": "",
+        "Password": "",
+        "E-mail": "",
+        "Website": "",
+        "Comment": "",
+        "Gender": "",
+        "Filepath": {
+            "name": "",
+            "full_path": "",
+            "type": "",
+            "tmp_name": "",
+            "error": 4,
+            "size": 0
+        }
     }
 ]
