@@ -34,7 +34,7 @@ if (!isset($warningMessage)) {
             </div>
         <?php endif; ?>
 
-        <label for="job_selector"><strong>Select Job:</strong></label> <select id="job_selector">
+        <label for="job_selector"><strong>Select Job:</strong></label>        <select id="job_selector">
             <option value="">Choose a Job</option>
 
             <?php if (!empty($employerJobs)): ?>

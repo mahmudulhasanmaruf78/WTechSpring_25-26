@@ -48,4 +48,3 @@ class GetApplicationsController
 }
 
 (new GetApplicationsController())->handle();
-?>

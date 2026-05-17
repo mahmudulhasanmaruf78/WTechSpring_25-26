@@ -31,9 +31,9 @@ class UpdateStatusController
             return;
         }
 
-        $appId = (int) $input['id'];
-        $newStatus = (string) $input['status'];
-        $employerId = (int) $_SESSION['user_id'];
+        $appId      = (int)    $input['id'];
+        $newStatus  = (string) $input['status'];
+        $employerId = (int)    $_SESSION['user_id'];
 
         if (!in_array($newStatus, self::ALLOWED_STATUSES, true)) {
             http_response_code(400);
@@ -43,9 +43,9 @@ class UpdateStatusController
 
         try {
             $dbObj = new db();
-            $conn = $dbObj->connection();
+            $conn  = $dbObj->connection();
 
-            $repo = new ApplicationRepository($conn);
+            $repo    = new ApplicationRepository($conn);
             $success = $repo->updateApplicationStatus($appId, $newStatus, $employerId);
 
             $conn->close();
@@ -64,4 +64,3 @@ class UpdateStatusController
 }
 
 (new UpdateStatusController())->handle();
-?>
