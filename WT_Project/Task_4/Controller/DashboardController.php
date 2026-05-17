@@ -59,3 +59,4 @@ class DashboardController
 
 // 3. Trigger the execution
 (new DashboardController())->render();
+?>

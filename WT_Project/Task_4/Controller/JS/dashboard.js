@@ -3,9 +3,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const tbody = document.getElementById("application_body");
 
   // Chart
-  const ctx = document.getElementById("applicationFunnelChart").getContext("2d");
+  const ctx = document
+    .getElementById("applicationFunnelChart")
+    .getContext("2d");
   let funnelChart = new Chart(ctx, {
-    type: "bar", data: {
+    type: "bar",
+    data: {
       labels: ["Submitted", "Reviewed", "Shortlisted", "Rejected"],
       datasets: [
         {

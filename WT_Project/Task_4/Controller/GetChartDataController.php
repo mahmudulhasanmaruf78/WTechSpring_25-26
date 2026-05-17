@@ -26,14 +26,14 @@ class GetChartDataController
             return;
         }
 
-        $jobId      = (int) $_GET['job_id'];
+        $jobId = (int) $_GET['job_id'];
         $employerId = (int) $_SESSION['user_id'];
 
         try {
             $dbObj = new db();
-            $conn  = $dbObj->connection();
+            $conn = $dbObj->connection();
 
-            $repo      = new ApplicationRepository($conn);
+            $repo = new ApplicationRepository($conn);
             $chartData = $repo->getChartDataByJob($jobId, $employerId);
 
             $conn->close();
@@ -47,3 +47,4 @@ class GetChartDataController
 }
 
 (new GetChartDataController())->handle();
+?>
